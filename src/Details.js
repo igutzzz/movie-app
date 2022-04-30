@@ -16,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
 
 const BgImage = styled.img`
     width: 100%;
+    image-fit: cover;   
     height: auto;
     position: absolute;
     z-index: -1;
@@ -29,12 +30,14 @@ const Titulo = styled.h1`
 `;
 
 const MovieDetails = styled.div`
+    font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.7);
-    width: 75%;
+    border-radius: 10px;
+    width: 75vw;
 `;
 
 const MovieBanner = styled.div`
@@ -42,11 +45,11 @@ const MovieBanner = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    width: 20rem;
 `;
 
 const Poster = styled.img`
-    width: 90%;
+    width: 75%;
     height: auto;
     border-radius: 10px;
 `
@@ -60,6 +63,10 @@ const MovieInfo = styled.div`
     margin-left: 2rem;
 `;
 
+const Home = styled.h4`
+    color: #fff;
+`
+
 function Details() {
     
     const {id} = useParams();
@@ -72,6 +79,7 @@ function Details() {
     }, [id]);
 
     const DetailsPage = styled.div`
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,400;0,700;1,200&display=swap');
         font-family: 'Poppins', sans-serif;
         color: #fff;
         height: 100%;
@@ -85,7 +93,7 @@ function Details() {
         <DetailsPage>
             <GlobalStyle />
             <BgImage src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} />
-            <Link to="/"><button>Home</button></Link>
+            <Link to="/" style={{textDecoration: 'none'}}><Home>Voltar para a Página Inicial</Home></Link>
             <MovieDetails>
                 <MovieBanner>
                 <Titulo>{movie.title}</Titulo>

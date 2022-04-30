@@ -3,8 +3,25 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import apiKey from './key';
 import styled from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+  html {
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;500;600&display=swap');
+    font-family: 'Outfit', sans-serif;
+  }
+`
+
+const HomePage = styled.div`
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;500;600&display=swap');
+  font-family: 'Outfit', sans-serif;
+  color: #fff;
+  background-color: #1a1b1c;
+`
 
 const Titulo = styled.h1`
+  margin: 0;
+  padding-top: 3rem;
   text-align: center;
 `
 
@@ -38,7 +55,12 @@ const BottomNavigation = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
+  margin: 20px 0 0;
+  padding: 1rem 0 2rem;
+`
+
+const PageNumber = styled.h3`
+  margin: 0 1rem;
 `
 
 const PageButton = styled.button`
@@ -68,16 +90,17 @@ function App() {
 
   const nextPage = () => {
     setPages(pages + 1);
-    window.scrollTo = (0,0);
+    window.scrollTo({top: 0, behavior: 'smooth'});
   }
 
   const prevPage = () => {
     setPages(pages === 1? pages: pages - 1);
-    window.scrollTo = ({top: 0, behavior: 'smooth'});
+    window.scrollTo({top: 0, behavior: 'smooth'});
   }
 
   return (
-    <div className="App">
+    <HomePage>
+      <GlobalStyle />
       <Titulo>Filmes Populares</Titulo>
       <MovieList>
         {movies.map(movie => (
@@ -89,10 +112,10 @@ function App() {
       </MovieList>
       <BottomNavigation>
         <PageButton onClick={prevPage}>Página Anterior</PageButton>
-        <p>Página {pages}</p>
+        <PageNumber>Página {pages}</PageNumber>
         <PageButton onClick={nextPage}>Próxima Página</PageButton>
       </BottomNavigation>
-    </div>
+    </HomePage>
   );
 }
 
